@@ -1,0 +1,351 @@
+INSTRUCTIONS:
+	•	Do Not use MS Word or MS WordPad to do your homework
+		For people with Apple PCs, use TextEdit application for your homework.
+
+		For people with Windows PCs, use Notepad application for your homework
+
+		As an alternative, there is a free Apple & Windows text editor that is very good for SW development.  Packages can be installed to make it more powerful, but the text editor alone is quite good.  Instructions for download/configuration/use can be found here:  https://atom.io/
+
+	•	You MUST test your code with a Python Interpreter using one of the 3 methods specified in the Course Policy document.  You MUST paste the output from the Python Interpreter below your code below.
+
+	•	Each question is worth 2.5 points each.  Reference the Python decks posted
+	  on Moodle as needed.  Read instructions carefully!
+
+	•	You MUST do your own work!  Consequences for plagiarism are documented
+	  in class policy document.
+==========================================================================
+
+1.  Write a function called UnicodeSort that takes one input string called inStr.  Use the input() method to query a user for the string to be passed to UnicodeSort and provide error message back to user if the string is not at least 10 characters long and to try again.  UnicodeSort will re-sort the characters in the input inStr based on it's Unicode  value.  Once the inStr is re-sorted based on it's  Unicode value, return the re-sorted string to the calling program.  Print out the user supplied input string as well as the re-sorted string, with the appropriate labels.  Note, use python logical operators to do the comparison.  Do not try to create a Unicode lookup table.
+
+For example, the character ‘e’ unicode value is 0x65 and the character ‘E’ = 0x45.  Your code should place the character 'E' in front of the character 'e' when re-sorting.  For the input string "x=(Z+93)*<four!/MYNUM>", your code should print out "!()*+/39<=>MMNUYZforux".
+
+Hint:  convert input string into a list when making comparisons and use join() method on list before returning answer to calling program
+
+CODE
+
+def Unicodesort(inStr):
+    list_str = list(inStr)
+    
+    list_str.sort()
+    # converting list back to string
+    sorted_str = "".join(list_str)
+    return sorted_str
+    
+    
+    
+while True:
+    inStr = input("Provide a string of at least 10 characters: ")
+    if len(inStr) >= 10:
+        sorted_str = Unicodesort(inStr)
+        #placeholder
+        print("Input string: {}".format(inStr))
+        print("Sorted string: {}".format(sorted_str))
+        break
+    else:
+        print("Please enter again")
+
+OUTPUT
+Provide a string of at least 10 characters: x=(Z+93)*<four!/MYNUM>
+Input string: x=(Z+93)*<four!/MYNUM>
+Sorted string: !()*+/39<=>MMNUYZforux
+
+
+
+
+
+
+2.  Write a function called VacationCosts which takes two inputs, a string called City and an integer called Days.  City is the place you wish to go on vacation and Days is the length of your vacation.  Inside the VacationCosts function, your code will call the following functions called HotelCost, FlyCost, RentalCarCost, FoodCost, FunCost (defined outside the VacationCosts function) for the associated costs of the vacation.  VacationCosts will then calculate the total costs for the flight, hotel, rental car, food, and fun, then return that value to the calling program.  Print out the city, days, and total costs of the vacation, with the appropriate labels.  Query the user for the city and days, but only allow the user to select the cities defined below and the number of days has to be at least 3 or more.  If city entered is not in the list or days entered is less than 3, tell the user to try again.
+
+Use the following data in your coding:
+
+CITIES		FLIGHT    HOTEL/DAY    RENTAL CAR/DAY     FOOD/DAY     FUN/DAY
+Seattle		$500			$200         $50                $100         $200
+Paris     $1000     $500         $150               $250         $400
+Tokyo     $2000     $700         $150               $300         $500
+Cairo     $2500     $300         $75                $150         $250
+Rio       $1500     $400         $100               $200         $1500
+
+CODE
+cities = ['Seattle', 'Paris', 'Tokyo', 'Cairo', 'Rio']
+flight_cost = {'Seattle': 500, 'Paris': 1000, 'Tokyo': 2000, 'Cairo': 2500, 'Rio': 1500}
+hotel_cost = {'Seattle': 200, 'Paris': 500, 'Tokyo': 700, 'Cairo': 300, 'Rio': 400}
+rental_car_cost = {'Seattle': 50, 'Paris': 150, 'Tokyo': 150, 'Cairo': 75, 'Rio': 100}
+food_cost = {'Seattle': 100, 'Paris': 250, 'Tokyo': 300, 'Cairo': 150, 'Rio': 200}
+fun_cost = {'Seattle': 200, 'Paris': 400, 'Tokyo': 500, 'Cairo': 250, 'Rio': 1500}
+
+def VacationCosts(City, Days):
+   total_cost = FlyCost(City) + HotelCost(City, Days) + FunCost(City, Days) + RentalCarCost(City, Days) + FoodCost(City, Days)
+   return total_cost
+
+def FlyCost(City):
+    flightCost = flight_cost[City]
+    return flightCost
+
+def HotelCost(City, Days):
+    hotelCost = hotel_cost[City] * Days
+    return hotelCost
+    
+def FunCost(City, Days):
+    funCost = fun_cost[City] * Days
+    return funCost
+    
+
+def RentalCarCost(City, Days):
+    rentalcarcost = rental_car_cost[City] * Days
+    return rentalcarcost
+    
+def FoodCost(City, Days):
+    foodcost = food_cost[City] * Days
+    return foodcost
+    
+
+while True:
+    city = input("Please enter city: ")
+    if city not in cities:
+        print("Please enter valid city")
+        continue
+    days = int(input("Please enter days: "))
+    if days < 3:
+        print("Please enter valid days")
+        continue
+    total = VacationCosts(city, days)
+    print("City: {}".format(city))
+    print("Days: {}".format(days))
+    print("Total: {}".format(total))
+    break
+
+
+OUTPUT
+Please enter city: New York
+Please enter valid city
+Please enter city: N N Seattle
+Please enter days: 2
+Please enter valid days
+Please enter city: Seattle
+Please enter days: 8
+City: Seattle
+Days: 8
+Total: 4900
+
+
+
+
+
+
+3.  Write a function called PigLatin which takes one input string called inStr.  The input string will consists of at least 2 words and the words are separated by a space.  Query the user for the input string, but validate that the string has at least two words before calling PigLatin function.  If the input string doesn't have at least 2 words, tell the user to try again.  PigLatin will convert the input string into its pig latin equivalent, e.g. the input string "my name is jimmie" is converted to "ymay amenay siay immiejay".  Return the pig latin equivalent string to the calling program.  Print out the user supplied input string as well as the pig latin equivalent string, with the appropriate labels.
+
+CODE
+vowels = ['a', 'e', 'i', 'o', 'u', 'y']
+
+def convert_to_pig_latin(word):
+    #find the index of vowel
+    vowel_index = len(word)
+    for idx in range(0, len(word)):
+        if word[idx] in vowels:
+            vowel_index = idx
+            break
+    # name
+    first_part = word[vowel_index:] # ame
+    second_part = word[0:vowel_index] #n
+    pig_latin_seq = first_part + second_part + "ay"
+    
+    return pig_latin_seq
+
+def PigLatin(inStr):
+    # name --> ame+n+ay
+    # my name is jimmie
+    word_list = inStr.split()
+    
+    output = ""
+    for word in word_list:
+        pig_latin_word = convert_to_pig_latin(word)
+        #print(pig_latin_word)
+        output += pig_latin_word
+        output += " "
+    return output
+    
+    
+    
+while True:
+    inString = input("Please input a string with at least two words: ")
+    word_list = inString.split()
+    #print(word_list)
+    if len(word_list) >= 2:
+        pig_latin_sequence = PigLatin(inString)
+        print("Original String: {}".format(inString))
+        print("PigLatin Sequence: {}".format(pig_latin_sequence))
+        break
+    else:
+        print("Please enter again!!")
+    
+    
+
+
+
+
+
+OUTPUT
+Please input a string with at least two words: my
+Please enter again!!
+Please input a string with at least two words: my name is Dereck
+Original String: my name is Dereck
+PigLatin Sequence: ymay amenay isay ereckDay 
+
+
+
+
+
+
+4.  Write a function called WriteReadPoem that has one input string called inStr.  The input string should be the below poem, with exactly the same structure as displayed, i.e. if you print out the input string, it prints exactly as displayed.
+
+"Do not go gentle into that good night,
+Old age should burn and rave at close of day;
+Rage, rage against the dying of the light.
+
+Though wise men at their end know dark is right,
+Because their words had forked no lightning they
+Do not go gentle into that good night.
+
+Good men, the last wave by, crying how bright
+Their frail deeds might have danced in a green bay,
+Rage, rage against the dying of the light.
+
+Wild men who caught and sang the sun in flight,
+And learn, too late, they grieved it on its way,
+Do not go gentle into that good night.
+
+Grave men, near death, who see with blinding sight
+Blind eyes could blaze like meteors and be gay,
+Rage, rage against the dying of the light.
+
+And you, my father, there on the sad height,
+Curse, bless, me now with your fierce tears, I pray.
+Do not go gentle into that good night.
+Rage, rage against the dying of the light."
+
+
+The WriteReadPoem function will write the input poem to a file called 'poem.txt'.  Once done writing, then WriteReadPoem will open poem.txt and read the poem into a new string called poemStr.  Return poemStr to the calling program and print it out.  The output should look exactly like the input string to WriteReadPoem.
+
+CODE
+def WriteReadPoem(inStr):
+    # print(inStr)
+
+    # f = open('poem.txt', 'w')
+
+    # f.write()
+
+    # f.close()
+
+    with open('poem.txt', 'w') as f:
+        f.write(inStr)
+    with open('poem.txt') as f:
+        poemStr = f.read()
+        return poemStr
+
+output = WriteReadPoem("""Do not go gentle into that good night,
+Old age should burn and rave at close of day;
+Rage, rage against the dying of the light.
+
+Though wise men at their end know dark is right,
+Because their words had forked no lightning they
+Do not go gentle into that good night.
+
+Good men, the last wave by, crying how bright
+Their frail deeds might have danced in a green bay,
+Rage, rage against the dying of the light.
+
+Wild men who caught and sang the sun in flight,
+And learn, too late, they grieved it on its way,
+Do not go gentle into that good night.
+
+Grave men, near death, who see with blinding sight
+Blind eyes could blaze like meteors and be gay,
+Rage, rage against the dying of the light.
+
+And you, my father, there on the sad height,
+Curse, bless, me now with your fierce tears, I pray.
+Do not go gentle into that good night.
+Rage, rage against the dying of the light.
+""")
+
+print(output)
+
+OUTPUT
+Do not go gentle into that good night,
+Old age should burn and rave at close of day;
+Rage, rage against the dying of the light.
+
+Though wise men at their end know dark is right,
+Because their words had forked no lightning they
+Do not go gentle into that good night.
+
+Good men, the last wave by, crying how bright
+Their frail deeds might have danced in a green bay,
+Rage, rage against the dying of the light.
+
+Wild men who caught and sang the sun in flight,
+And learn, too late, they grieved it on its way,
+Do not go gentle into that good night.
+
+Grave men, near death, who see with blinding sight
+Blind eyes could blaze like meteors and be gay,
+Rage, rage against the dying of the light.
+
+And you, my father, there on the sad height,
+Curse, bless, me now with your fierce tears, I pray.
+Do not go gentle into that good night.
+Rage, rage against the dying of the light.
+
+
+
+5.  Write a function called LibraryStuff that no input and returns no output.  Inside LibraryStuff, write code that demonstrates the following:
+
+    Printing current date and time using datetime library
+		Calculates the circumference of a circle using math library
+		Converts a string to its binary representation using the binascii library
+		Prompt the user for a password without echoing using the getpass library
+    Create a SHA256 hash for a string using the hashlib library
+
+A good reference for reading about libraries is at https://docs.python.org/3/library/.  All of the above tasks should print the results, with the appropriate labels.
+
+CODE
+import datetime
+import math
+import binascii
+import getpass
+import hashlib
+
+def LibraryStuff():
+    
+    #a = 1
+    #b = 2
+    #c = 3
+    #bin = binary
+    #import <module> it will just import that module
+    #from <module> import <class>
+    #module, class, method
+    #print("a = {}, b = {}, c = {}".format(a, b, c))
+    #print("a = ", a, " b = ", b, " c = ", c)
+    r = 2.0
+    print("Current date and time: {}".format(datetime.datetime.now()))
+    print("The circumference of a circle: {}".format(2*math.pi*r))
+    print("String to binary conversion: {}".format(bin(int(binascii.hexlify('dereck'.encode()),16))))
+    getpass.getpass(prompt="Please enter password: ")
+    
+    inputStr = "hello"
+    result = hashlib.sha256(inputStr.encode())
+    print(result.hexdigest())
+
+LibraryStuff()
+
+
+
+OUTPUT
+Current date and time: 2020-04-10 17:24:25.623040
+The circumference of a circle: 12.566370614359172
+String to binary conversion: 0b11001000110010101110010011001010110001101101011
+Please enter password: 
+2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824
+
+
+

@@ -1,0 +1,16 @@
+def CombineLists(inStrList, inNumList):
+    newList = { }
+    for i in range(len(inStrList)):
+        if inStrList[i] in newList:
+            newList[inStrList[i]] += inNumList[i]
+        else:
+            newList[inStrList[i]] = inNumList[i]
+    return newList
+#Write a python function called CombineLists that takes two equal length input lists called inStrList & inNumList, where there is at least one item in each input list. inStrList contains only string items and inNumList only contains integer items. The function will create a new dictionary called newDict by combining the equal-index values items from the two input lists into dictionary key:value pairs, where the string item from inStrList is the key and the integer item from inNumList is the value. However, if an item in inStrList is already defined as a key in newDict, then add the associated integer in inNumList to the existing value for that key. When done, return newDict.
+
+#For example,
+#if inStrList is ["apple", "banana", "cherry", "orange", "lime", "cherry", "lemon"]
+#and inNumList is [5, 10, 15, 20, 25, 30, 35]
+#then newDict will be {"apple":5, "banana":10, "cherry":45, "orange":20, "lime":25, "lemon":35}
+
+#HINTS: Use for loop with range() function to iterate through inStrList and the solution can be coded with just 8 lines of code

@@ -1,0 +1,154 @@
+INSTRUCTIONS:
+	•	Do Not use MS Word or MS WordPad to do your homework
+		For people with Apple PCs, use TextEdit application for your homework.
+
+		For people with Windows PCs, use Notepad application for your homework
+
+		As an alternative, there is a free Apple & Windows text editor that is very good for SW development.  Packages can be installed to make it more powerful, but the text editor alone is quite good.  Instructions for download/configuration/use can be found here:  https://atom.io/
+
+	•	You MUST test your code with a Python Interpreter using one of the 3 methods specified in the Course Policy document
+
+	•	Each question is worth 2.5 points each.  Reference the Python decks posted
+	  on Moodle as needed.  Read instructions carefully!
+
+	•	You MUST do your own work!  Consequences for plagiarism are documented
+	  in class policy document.
+==========================================================================
+
+1.  Write a function called NewList that takes two input Lists and creates a new List that contains all the odd-index elements from the first list and all even index elements from second list.  Assume the numbers in the List are unique to that list, i.e. there are no duplicate numbers in a list.
+
+After creating the new List, then sort the items in the list from largest to smallest.  Return this sorted list from the function and print it out it out to the console window with the appropriate label.
+
+For example, if the first input list passed to your function is [3, 6, 9, 12, 15, 18, 21] and the second input list passed to your function is [1, 4, 7, 10, 13, 16, 19].  The new list created would be [3, 9, 15, 21, 4, 10, 16].  After sorting, the new list returned would be [21, 16, 15, 10, 9, 4, 3].
+
+def NewList(input1, input2):
+    #input1 = [5, 6, 8, 9, 10, 11]
+    #input2 = [1, 2, 3, 4, 12, 13]
+    NewList = []
+    index = 0
+    for x in input1:
+        if (index % 2 == 0):
+            NewList.append(x)
+        index += 1
+    index = 1 
+    for x in input2:
+        if (index % 2 != 0):
+            NewList.append(x)
+        index += 1
+    NewList.sort(reverse=True)
+    return NewList
+    
+input1 = [3, 6, 9, 12, 15, 18, 21]
+input2 = [1, 4, 7, 10, 13, 16, 19]
+x = NewList(input1, input2)
+print(x)
+
+
+
+
+2.  Write a function called Splitter that takes a string as an input, iterates through the input string, and creates and returns a new string with vowels first and consonants second. Vowels are “a, e, i, o, and u”.  For any character that's not a vowel (special characters, numbers, or spaces), treat them like consonants.  Assume the input string has to be at least 5 characters in length.
+
+Use the python input() method to query a User for the string to be passed as input to the Splitter function before calling the function.  Validate the User supplied string is at least 5 characters long and provide the appropriate error to the User to try again if the entered string does not meet this criteria.  Print the returned string to the console window with the appropriate label.
+
+Some string examples are:
+
+"abcde" ➞ "“bcdae”
+“Hello!” ➞ “Hll!eo”
+"What's the time?" ➞ "Wht's th tm?aeie"
+
+def Splitter(string):
+    vowels = ""
+    consonants = ""
+    for x in string:
+        if x.lower() in "aeiou":
+            vowels += x
+        else:
+            consonants += x
+    return vowels+consonants
+
+# Testing
+str = input()
+while len(str) < 5:
+    print("Please enter again")
+    str = input()
+print(Splitter(str))
+#print(Splitter("abcde"))
+#print(Splitter("Hello!"))
+#print(Splitter("What's the time?"))
+
+
+
+
+
+3.  Write a function called Encrypt that takes a string (provided by a User using the python input() method) as an input, iterates through the input string, and creates/returns it’s encrypted equivalent string.  The hashing algorithm for doing the encryption is a simple alphabetic character substitution using the following algorithm:  a-> 01, b -> 02, c -> 03, d -> 04, …, z -> 26.
+
+Assume the input string contains only alphabetic characters, i.e.. no numbers, spaces or special characters and that the input string has to be at least 5 characters long.  Also assume no difference between uppercase and lowercase letters when doing the encryption.  Validate the User supplied string contains only alphabetic characters that's at least 5 characters in length and provide the appropriate error to the User to try again if the entered string does not meet this criteria.  Print the returned string to the console window with the appropriate label.
+
+HINT: create a dictionary in your function that contains the letter -> number translations to use as your hashing algorithm, where alphabetic letter is the key and the substitution number is the value.
+
+For example:  input string = “HappyDay” ➞ "0801161625040125”
+
+def encrypt(word):
+    cipher ={"a":"01","b":"02","c":"03","d":"04","e":"05","f":"06","g":"07","h":"08","i":"09","j":"10","k":"11","l":"12","m":"13","n":"14","o":"15","p":"16","q":"17","r":"18","s":"19","t":"20","u":"21","v":"22","w":"23","x":"24","y":"25","z":"26"}
+    result = ''
+    # word = ABC
+    # print(word)
+    word = word.lower()
+    #print(word)
+    # abc
+    for letter in word:
+        result = result + cipher[letter]
+    return result
+
+str = input()
+while len(str) < 5 or str.isalpha() == False:
+    print("Please enter again")
+    str = input()
+print(encrypt(str))
+
+
+
+
+
+4.  Write a function called ProdSum that has no inputs and asks a user to input a number from one to 99.  If the input number is less than or equal to 25, then calculate the running product (multiplication) of each number input by the user, that is less that or equal to 25.  If the number is greater than 25, then calculate the running sum (addition) of each number input by the user, that is greater that 25.  If the user enters zero as input, then end the calculations and print out the total running product calculated and the total running sum calculated, as well as the numbers used in each calculation and the appropriate labels (see below for example of what your output should look like).
+
+Assume the user can input as many numbers as desired until inputting a zero.  Make sure you test the number input by the user to ensure it is in the range from zero to 99 and inform the user the number is not in the range and to try again.
+
+For Example:
+
+Enter a number from 1 to 99 or 0 to Exit: 5
+Enter a number from 1 to 99 or 0 to Exit: 26
+Enter a number from 1 to 99 or 0 to Exit: 25
+Enter a number from 1 to 99 or 0 to Exit: 113
+You entered an invalid number.  Please try again.
+Enter a number from 1 to 99 or 0 to Exit: 55
+Enter a number from 1 to 99 or 0 to Exit: 13
+Enter a number from 1 to 99 or 0 to Exit: 64
+Enter a number from 1 to 99 or 0 to Exit: 0
+
+The product of the numbers [5, 25, 13] is 1625
+The sum of the numbers [26, 55, 64] is 145
+
+def ProdSum():
+    product = 1
+    sum = 0
+    onelist = []
+    twolist = []
+    n=int(input("Enter a number 1 to 99 or 0 to Exit: "))
+    while n!=0:
+        if n<0 or n>99:
+            n=int(input("You entered an invalid number. Please try again."))
+        else:
+            if n<=25:
+                onelist.append(n)
+                product = product * n 
+            else:
+                twolist.append(n)
+                sum = sum + n
+        n=int(input("Enter a number 1 to 99 or 0 to Exit: "))
+        
+    print("The product of the numbers", onelist, "is" ,product)
+    print("The sum of the numbers", twolist, "is" ,sum)
+
+ProdSum()
+    
