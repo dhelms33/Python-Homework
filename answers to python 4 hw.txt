@@ -1,0 +1,139 @@
+INSTRUCTIONS:
+	•	Do Not use MS Word or MS WordPad to do your homework
+		For people with Apple PCs, use TextEdit application for your homework.
+
+		For people with Windows PCs, use Notepad application for your homework
+
+		As an alternative, there is a free Apple & Windows text editor that is very good for SW development.  Packages can be installed to make it more powerful, but the text editor alone is quite good.  Instructions for download/configuration/use can be found here:  https://atom.io/
+
+	•	You MUST test your code with a Python Interpreter using one of the 3 methods specified in the Course Policy document
+
+	•	Each question is worth 2.5 points each.  Reference the Python decks posted
+	  on Moodle as needed.  Read instructions carefully!
+
+	•	You MUST do your own work!  Consequences for plagiarism are documented
+	  in class policy document.
+==========================================================================
+
+1.  Write a function called NewList that takes two input Lists and creates a new List that contains all the even-index elements from the first list and all odd-index elements from second list.  Assume the numbers in the List are unique to that list, i.e. there are no duplicate numbers in a list.
+
+After creating the new List, then sort the items in the list from largest to smallest.  Return this sorted list from the function and print it out it out to the console window with the appropriate label.
+
+For example, if the first input list passed to your function is [3, 6, 9, 12, 15, 18, 21] and the second input list passed to your function is [1, 4, 7, 10, 13, 16, 19].  The new list created would be [3, 9, 15, 21, 4, 10, 16].  After sorting, the new list returned would be [21, 16, 15, 10, 9, 4, 3].
+
+def NewList(List1, List2):
+        evens = List1[0::2]
+        odds = List2[1::2]
+        AnswerList = evens + odds
+        AnswerList.sort(reverse=True)
+        return AnswerList
+
+input1 = [3, 6, 9, 12, 15, 18, 21]
+input2 = [1, 4, 7, 10, 13, 16, 19]
+Answer = NewList(input1, input2)
+print("The new listed created in NewList function is:", Answer)
+
+
+2.  Write a function called Splitter that takes a string as an input, iterates through the input string, and creates and returns a new string with vowels first and consonants second. Vowels are “a, e, i, o, and u”.  For any character that's not a vowel (special characters, numbers, or spaces), treat them like consonants.  Assume the input string has to be at least 5 characters in length.
+
+Use the python input() method to query a User for the string to be passed as input to the Splitter function before calling the function.  Validate the User supplied string is at least 5 characters long and provide the appropriate error to the User to try again if the entered string does not meet this criteria.  Print the returned string to the console window with the appropriate label.
+
+Some string examples are:
+
+"abcde" ➞ "“bcdae”
+“Hello!” ➞ “Hll!eo”
+"What's the time?" ➞ "Wht's th tm?aeie"
+
+def Splitter(inSTR):
+    v = []
+    c = []
+    for x in inSTR:
+        if x.lower() in 'aeiou':
+            v.append(x)
+        else:
+            c.append(x)
+    return ''.join(c) + ''.join(v)
+
+instring=input("Enter a 5 character or more string: ")
+while len(instring) < 5:
+    print("Invalid string length less than 5 characters!  Please try again\n")
+    instring = input("Enter a 5 character or more string: ")
+
+print("The input string \"%s\" is split into: \"%s\"" % (instring, Splitter(instring)))
+
+
+3.  Write a function called Encrypt that takes a string (provided by a User using the python input() method) as an input, iterates through the input string, and creates/returns it’s encrypted equivalent string.  The hashing algorithm for doing the encryption is a simple alphabetic character substitution using the following algorithm:  a-> 01, b -> 02, c -> 03, d -> 04, …, z -> 26.
+
+Assume the input string contains only alphabetic characters, i.e.. no numbers, spaces or special characters and that the input string has to be at least 5 characters long.  Also assume no difference between uppercase and lowercase letters when doing the encryption.  Validate the User supplied string contains only alphabetic characters that's at least 5 characters in length and provide the appropriate error to the User to try again if the entered string does not meet this criteria.  Print the returned string to the console window with the appropriate label.
+
+HINT: create a dictionary in your function that contains the letter -> number translations to use as your hashing algorithm, where alphabetic letter is the key and the substitution number is the value.
+
+For example:  input string = “HappyDay” ➞ "0801161625040125”
+
+def encrypt(inStr):
+    Encryption = { 'a':"01", 'b':"02", 'c':"03", 'd':"04", 'e':"05",'f':"06", 'g':"07", 'h':"08",'i':"09", 'j':"10", 'k':"11", 'l':"12", 'm':"13", 'n':"14", 'o':"15", 'p':"16",'q':"17", 'r':"18", 's':"19", 't':"20", 'u':"21", 'v':"22", 'w':"23", 'x':"24",'y':"25", 'z':"26"}
+    encryptStr = []
+
+    for char in inStr:
+       encryptStr.append(Encryption[char.lower()])
+
+    return encryptStr
+
+instring=input("Enter a 5 alphabetic character or more string: ")
+while len(instring) < 5 or not instring.isalpha():
+    if len(instring) < 5:
+        print("Invalid! String length must be 5 characters or more!  Please try again\n")
+    else:
+        print("Invalid! Must be alphanumeric characters only!  Please try again\n")
+    instring = input("Enter a 5 alphabetic character or more string: ")
+
+print("The encrypted version of the string %s is %s" % (instring, encrypt(instring)))
+
+
+4.  Write a function called ProdSum that has no inputs and asks a user to input a number from one to 99.  If the input number is less than or equal to 25, then calculate the running product (multiplication) of each number input by the user, that is less that or equal to 25.  If the number is greater than 25, then calculate the running sum (addition) of each number input by the user, that is greater that 25.  If the user enters zero as input, then end the calculations and print out the total running product calculated and the total running sum calculated, as well as the numbers used in each calculation and the appropriate labels (see below for example of what your output should look like).
+
+Assume the user can input as many numbers as desired until inputting a zero.  Make sure you test the number input by the user to ensure it is in the range from zero to 99 and inform the user the number is not in the range and to try again.
+
+For Example:
+
+Enter a number from 1 to 99 or 0 to Exit: 5
+Enter a number from 1 to 99 or 0 to Exit: 26
+Enter a number from 1 to 99 or 0 to Exit: 25
+Enter a number from 1 to 99 or 0 to Exit: 113
+You entered an invalid number.  Please try again.
+Enter a number from 1 to 99 or 0 to Exit: 55
+Enter a number from 1 to 99 or 0 to Exit: 13
+Enter a number from 1 to 99 or 0 to Exit: 64
+Enter a number from 1 to 99 or 0 to Exit: 0
+
+The product of the numbers [5, 25, 13] is 1625
+The sum of the numbers [26, 55, 64] is 145
+
+def ProdSum():
+    n = 0
+    Sum = 0
+    Product = 1
+    SumList = []
+    ProductList = []
+
+    n = int(input("Enter a positive number from 1 to 99 or 0 to Exit: "))
+    while n < 0 or n > 99:          # check for invalid input by the user
+        print("Invalid! Only positive numbers from 0 to 99 allowed!  Try again.\n")
+        n = int(input("Enter a positive number from 1 to 99 or 0 to Exit: "))
+
+    while n != 0:
+        if n > 0 and n <= 25:
+            Product = Product * n
+            ProductList.append(n)
+        else:
+            Sum = Sum + n
+            SumList.append(n)
+        n = int(input("Enter a positive number from 1 to 99 or 0 to Exit: "))
+        while n > 99 or n < 0:      # recheck for invalid input by the user
+            print("Invalid! Only positive numbers from 0 to 99 allowed!  Try again.\n")
+            n = int(input("Enter a positive number from 1 to 99 or 0 to Exit: "))
+    else:
+        print("The product of the numbers  ", ProductList, " is ", Product)
+        print("The sum of the numbers  ", SumList, " is ", Sum)
+
+ProdSum()

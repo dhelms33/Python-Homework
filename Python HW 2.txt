@@ -1,0 +1,157 @@
+Python HW #2
+Name: Dereck Helms
+
+1.  Write the python statement that creates a list called myPackingList and contains the items “books”, “jacket”, “shoes”, “iPad”, “socks”, “belt”, and “shirt”.
+
+myPackingList = ["books", "jacket", "iPad", "socks", "belt", "shirt"]
+print(myPackingList)
+
+Output:
+['books', 'jacket', 'iPad', 'socks', 'belt', 'shirt']
+
+
+
+
+
+2. Write the python statement that prints out the 5th item from myPackingList.
+
+myPackingList = ["books", "jacket", "iPad", "socks", "belt", "shirt"]
+print(myPackingList[4])
+
+Output:
+belt
+
+
+3.  Write out the python statement that changes the value “iPad” to “iPhone” from myPackingList. 
+myPackingList = ["books", "jacket", "iPad", "socks", "belt", "shirt"]
+myPackingList[2] = "iPhone"
+print(myPackingList)
+Output:
+['books', 'jacket', 'iPhone', 'socks', 'belt', 'shirt']
+
+
+
+
+
+
+4.  Write out the python statements that determines if the value “shirt” is present in myPackingList and prints the message “Shirt are packed!”
+
+myPackingList = ["books", "jacket", "iPad", "socks","belt", "shirt"]
+if "shirt" in myPackingList:
+    print("Shirts are packed!")
+
+Output:
+
+Shirts are packed!
+
+
+
+
+
+
+5.  Write the python statements that creates a new list called myNewList and has 4 different items from myPackingList of your choosing.  Then write the python statements that join myPackingList and myNewList into a new list called myJoinedList.
+
+myPackingList = ["books", "jacket", "iPad", "socks", "belt", "shirt"]
+myNewList= list(("books", "jacket", "iPad", "socks"))
+myJoinedList = myNewList + myPackingList
+print(myJoinedList)
+
+Output:
+
+['books', 'jacket', 'iPad', 'socks', 'books', 'jacket', 'iPad', 'socks', 'belt', 'shirt']
+
+
+
+
+
+
+6.  Write the python statement that creates a new dictionary called myPhoneBook that contains 7 people’s names and phone numbers.
+
+myPhoneBook = {
+"Steven Universe": 1247899821,
+"Izuku Midoriya": 7777758888,
+"Walter White": 6642889999,
+"BEEG YOSHI": 9999999321,
+"Lugi Mario": 3332221111,
+"Woomy Ngyes": 4444444453,
+"Link Hylian" : 4565600000
+}
+print(myPhoneBook)
+
+
+
+
+7.  Write the three different python statements that all accomplish the same thing that deletes the last person’s name and phone number from the dictionary.
+
+myPhoneBook.remove(“Link Hylian”) 
+#note= myPhoneBook.remove doesn’t work in Python for dictionaries
+myPhoneBook.pop("Link Hylian")
+del myPhoneBook["Link Hylian"]
+
+
+
+
+8.  Write the python statements that loops through myPhoneBook and prints the contents to the console window.
+
+myPhoneBook = {
+"Steven Universe": 1247899821,
+"Izuku Midoriya": 7777758888,
+"Walter White": 6642889999,
+"BEEG YOSHI": 9999999321,
+"Lugi Mario": 3332221111,
+"Woomy Ngyes": 4444444453,
+"Link Hylian" : 4565600000
+}
+for name, number in myPhoneBook.items():
+    print(name, number)
+
+Output:
+Walter White 6642889999
+BEEG YOSHI 9999999321
+Izuku Midoriya 7777758888
+Link Hylian 4565600000
+Woomy Ngyes 4444444453
+Steven Universe 1247899821
+Lugi Mario 3332221111
+
+
+
+
+
+9.  Write the python statement that copies myPhoneBook to a new dictionary called myNewDictionary
+
+myPhoneBook = {
+"Steven Universe": 1247899821,
+"Izuku Midoriya": 7777758888,
+"Walter White": 6642889999,
+"BEEG YOSHI": 9999999321,
+"Lugi Mario": 3332221111,
+"Woomy Ngyes": 4444444453,
+"Link Hylian" : 4565600000
+}
+myNewDictionary = myPhoneBook.copy()
+print(myNewDictionary)
+
+Output:
+{'Izuku Midoriya': 7777758888, 'Walter White': 6642889999, 'Lugi Mario': 3332221111, 'BEEG YOSHI': 9999999321, 'Steven Universe': 1247899821, 'Woomy Ngyes': 4444444453, 'Link Hylian': 4565600000}
+
+
+
+10.  Write the python statement that adds a new person’s name to myPhoneBook.
+
+myPhoneBook = {
+"Steven Universe": 1247899821,
+"Izuku Midoriya": 7777758888,
+"Walter White": 6642889999,
+"BEEG YOSHI": 9999999321,
+"Lugi Mario": 3332221111,
+"Woomy Ngyes": 4444444453,
+"Link Hylian" : 4565600000
+}
+myPhoneBook["Big Toot"] = 123456789
+print(myPhoneBook)
+
+Output:
+{'Lugi Mario': 3332221111, 'Walter White': 6642889999, 'Link Hylian': 4565600000, 'Steven Universe': 1247899821, 'Big Toot': 1234567890, 'BEEG YOSHI': 9999999321, 'Woomy Ngyes': 4444444453, 'Izuku Midoriya': 7777758888}
+
+
