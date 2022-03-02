@@ -1,0 +1,91 @@
+Class Example #1 - No Inheritance
+
+class Car:
+    def __init__(self, color, model):
+        self.color = color
+        self.model = model
+        self.engine = "off"
+
+    def start_engine(self):
+        if self.engine == "off":
+            print("Starting Engine! ")
+            self.engine = "on"
+        else:
+            print("The engine is running already! ")
+
+    def stop_engine(self):
+        if self.engine == "on":
+            print("Stopping Engine! ")
+            self.engine = "off"
+        else:
+            print("The engine is already off ! ")
+
+    def drive(self):
+        if self.engine == "on":
+            print("Driving the car! ")
+        else:
+            print("The engine needs to be started first! ")
+
+    def display_car(self):
+        print("Car color: ", self.color)
+        print("Car Model: ", self.model)
+        print("Car Engine: ", self.engine)
+
+mycar = Car("Red", "Lamborghini Aventador")
+print(mycar.color)
+print(mycar.model)
+mycar.display_car()
+#mycar.start_engine()
+mycar.drive()
+mycar.stop_engine()
+
+====================================================================
+Class Example #2 - Single Inheritance & Over-ridding Method
+
+class Car:
+    def __init__(self, color):
+        self.color = color
+        self.engine = "off"
+
+    def start_engine(self):
+        if self.engine == "off":
+            print("Starting Engine! ")
+            self.engine = "on"
+        else:
+            print("The engine is running already! ")
+
+    def stop_engine(self):
+        if self.engine == "on":
+            print("Stopping Engine! ")
+            self.engine = "off"
+        else:
+            print("The engine is already off ! ")
+
+    def drive(self):
+        if self.engine == "on":
+            print("Driving the car! ")
+        else:
+            print("The engine needs to be started first! ")
+
+    def display_car(self):
+        print("Car color: ", self.color)
+        print("Car Engine: ", self.engine)
+
+class Lamborghini(Car):
+    def __init__(self, color):
+        Car.__init__(self, color)
+        self.model = "Lamborghini Aventador"
+
+    def display_car(self):
+        print("Car color: ", self.color)
+        print("Car Model: ", self.model)
+        print("Car Engine: ", self.engine)
+
+
+mylamborghini = Lamborghini("Red")
+print(mylamborghini.color)
+print(mylamborghini.model)
+mylamborghini.display_car()
+mylamborghini.start_engine()
+mylamborghini.drive()
+mylamborghini.stop_engine()
